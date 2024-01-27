@@ -1,0 +1,68 @@
+1) create instance ---- amazon linux ami
+2) open terminal 
+3) git clone https://github.com/prathammore0025/devops-fullstack-app.git
+4) install npm in instance 
+
+     * sudo -i
+
+     * curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+     * . ~/.nvm/nvm.sh
+
+     *  nvm install node
+5) install npm and start it 
+     
+    * cd devops-fullstack-app/frontend
+
+    * npm install 
+
+    * npm start
+
+hit ip on 3000, add 3000 port in security group
+
+
+------------------------------------------------------------------------------------------
+
+
+Now containerized node.js app
+
+1) create dockerfile in visual code in frontend directory
+
+FROM node:14.17.0
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+
+
+2) commite and pull sync changes 
+3) open terminal 
+4) install docker in instance 
+    * yum install docker -y
+    * systemctl start docker 
+5) pull dockerfile and install npm in frontend and start app 
+
+   * cd devops-fullstack-app
+
+   * git pull origin main 
+ 
+   * cd frontend
+
+   * docker build . -t jay:v1       (we give tag to images "-t"..)
+ 
+   * docker run -p 3000:3000 -d jay:v1         or        docker run -p 3000:3000 -d "images-id"
+
+# hit ip with 3000 port
+# check security group.
+
+
+----------------------------------------------------END-----------------------------------------------------------
+
