@@ -1,12 +1,22 @@
-# INSTRUCTION ARG1 ARG2 ...
 FROM centos:7
-LABEL author=prathameshmore
-RUN yum install httpd -y
+
+# Update package lists for reliability
+RUN yum update -y
+
+# Install necessary dependencies for httpd
+RUN yum install -y wget gcc make
+
+# Install httpd
+RUN yum install -y httpd
+
+# Copy index.html
 COPY index.html /var/www/html/index.html
-# ADD source dest
-# WORKDIR /var/www/html
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Expose port 80
 EXPOSE 80
-# CMD httpd -DFOREGROUND
-# CMD ["httpd", "-DFOREGROUND"]
-# ENTRYPOINT httpd -DFOREGROUND
+
+# Start Apache in the foreground
 ENTRYPOINT ["httpd", "-DFOREGROUND"]
