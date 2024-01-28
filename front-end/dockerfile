@@ -1,13 +1,18 @@
-FROM ubuntu:20.04  # Use a specific Ubuntu version for consistency
-
+FROM ubuntu:20.04
 LABEL author=prathameshmore
 
-RUN apt-get update && apt-get install -y apache2
+# Update package list and install Apache
+RUN apt-get update && \
+    apt-get install -y apache2
 
+# Copy the index.html file to the web server root directory
 COPY index.html /var/www/html/index.html
 
+# Set the working directory to the web server root directory
 WORKDIR /var/www/html
 
+# Expose port 80 for HTTP traffic
 EXPOSE 80
 
-ENTRYPOINT ["apache2ctl", "-D", "FOREGROUND"]  # Use apache2ctl for Ubuntu
+# Start Apache in the foreground as the entry point
+CMD ["apache2ctl", "-D", "FOREGROUND"]
