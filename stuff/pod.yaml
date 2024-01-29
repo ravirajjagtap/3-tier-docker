@@ -1,4 +1,5 @@
 # Define the Pod
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -9,8 +10,9 @@ spec:
     image: nginx:latest
     ports:
     - containerPort: 80
-
+...
 # Define the Service
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -23,3 +25,4 @@ spec:
   - port: 80
     targetPort: 80
     nodePort: 30080  # Expose the service on this NodePort
+    ...
