@@ -9,8 +9,9 @@ spec:
   - name: http-container
     image: httpd  # You can replace this with the image of your HTTP server
     ports:
-    - containerPort: 80
-    - protocol: TCP
+     name: http  
+     containerPort: 80
+     protocol: TCP
 ---
 apiVersion: v1
 kind: Service
