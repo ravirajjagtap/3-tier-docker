@@ -1,22 +1,24 @@
+# Define the Pod
 apiVersion: v1
 kind: Pod
 metadata:
-  name: parthm
+  name: prathm
 spec:
   containers:
-  - name: http-container
-    image: httpd  # You can replace this with the image of your HTTP server
-    ports:  
+  - name: new cont
+    image: httpd
+    ports:
     - containerPort: 80
-      protocol: TCP
----
+
+# Define the Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: http-service
+  name: nodePort
 spec:
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
   type: NodePort
+  selector:
+    app: httpd  # Label for selecting Pods to expose
+  ports:
+  - port: 80
+    targetPort: 80
