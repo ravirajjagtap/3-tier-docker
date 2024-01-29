@@ -1,25 +1,33 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: prathm
+  name: cbz-pod
   labels:
-    app: my-http-app
+    app: cbz-app
 spec:
   containers:
-  - name: http-container
-    image: httpd  # You can replace this with the image of your HTTP server
-    ports:
-    - containerport: 80
+    - name: cbz-container
+      image: httpd
+      ports:
+        - containerPort: 80
+    - name: tomcat-container
+      image: tomcat
+      ports:
+        - containerPort: 8080
+...
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: jay
+  name: cbz-service
 spec:
   selector:
-    app: my-http-app
+    app: cbz-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
   type: NodePort
+...
